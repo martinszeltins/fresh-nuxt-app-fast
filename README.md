@@ -1,0 +1,65 @@
+patch.diff
+
+```diff
+diff --git a/layers/common/nuxt.config.ts b/layers/common/nuxt.config.ts
+index 66c3ac30..5c10a792 100644
+--- a/layers/common/nuxt.config.ts
++++ b/layers/common/nuxt.config.ts
+@@ -1,3 +1,19 @@
+ export default defineNuxtConfig({
++    modules: [
++        '@vueuse/nuxt',
++        '@nuxt/ui',
++        '@nuxtjs/i18n',
++    ],
++
++    css: [
++        '#layers/common/app/assets/css/app.css',
++    ],
++
++    i18n: {
++        defaultLocale: 'en',
++        strategy: 'no_prefix',
++        locales: [{ code: 'en', name: 'English' }],
++    },
++
+     compatibilityDate: '2026-06-18',
+ })
+diff --git a/layers/my-app/app/app.vue b/layers/my-app/app/app.vue
+index d0c36918..1eca8922 100644
+--- a/layers/my-app/app/app.vue
++++ b/layers/my-app/app/app.vue
+@@ -1,3 +1,7 @@
+ <template>
+-    <div>Nuxt app</div>
++    <UApp>
++        <div class="p-56 m-6 rounded-xl bg-emerald-700 text-white text-center">
++            Nuxt App
++        </div>
++    </UApp>
+ </template>
+diff --git a/package.json b/package.json
+index 788e3ca2..86be8c75 100644
+--- a/package.json
++++ b/package.json
+@@ -10,7 +10,11 @@
+     "postinstall": "nuxt prepare"
+   },
+   "dependencies": {
++    "@nuxt/ui": "4.8.2",
++    "@nuxtjs/i18n": "10.4.0",
++    "@vueuse/nuxt": "14.3.0",
+     "nuxt": "^4.4.8",
++    "tailwindcss": "4.3.0",
+     "vue": "^3.5.35",
+     "vue-router": "^5.1.0"
+   }
+diff --git a/layers/common/app/assets/css/app.css b/layers/common/app/assets/css/app.css
+new file mode 100644
+--- /dev/null
++++ b/layers/common/app/assets/css/app.css
++++ b/layers/common/app/assets/css/app.css
+@@ -0,0 +1,2 @@
++@import "tailwindcss";
++@import "@nuxt/ui";
+```
